@@ -1,0 +1,38 @@
+<h1> Login</h1>
+<form id="signin"  method="POST"></form>
+    
+    <div><label for= "email"> Email</label>
+        <input id ="email" type = "email" name= "email"  placeholder="Tu email">
+    </div>
+    <br> <br>
+    <div> <label for= "password"> Password</label>
+        <input id="password" type="password" name = "password"  placeholder= "Tu contraseña">
+    </div>
+    <br> <br>
+    <input type="submit" value= "signin" onclick=signer() >
+    <script >
+        function signer() {
+
+        let email = document.getElementById("email").value 
+        let password = document.getElementById("password").value
+
+            fetch(`api/signin`, {
+            method: `POST`,
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        })
+        .then(res => res.json())
+        .then(data => localStorage.setItem(`token`, data.token))
+        }
+
+    </script>
+</form>
+
+
+
